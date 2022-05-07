@@ -73,4 +73,44 @@ if(isset($_POST['deleteid'])){
   $deletequery = "DELETE FROM `crudtable` WHERE `crudtable`.`id` = '$userid'";
   mysqli_query($conn,$deletequery);
 }
+
+//get userid for update
+if(isset($_POST['id']) && isset($_POST['id']) != ""){
+  $user_id = $_POST['id'];
+  $query = "SELECT * FROM crudtable WHERE id = '$user_id'";
+  if(!$result = mysqli_query($conn,$query)){
+    exit(mysqli_error($conn));
+  }
+
+  $response = array();
+  if(mysqli_num_rows($result)>0){
+    while($row = mysqli_fetch_assoc($result)){
+      $response = $row;
+    }
+  }
+  else {
+    $response['status'] = 200;
+    $response['message'] = "Data not found!";
+  }
+  //php has some built-in functions to handle JSON
+  //objects in PHP can be converted into JSON by using the PHP function
+  echo json_encode($response);
+
+}else{
+  $response['status'] = 200;
+    $response['message'] = "Invalid Request";
+}
+
+//update table
+if(isset($_POST['hidden_user_idupd'])){
+  $hidden_user_idupd = $_POST['hidden_user_idupd'];
+  $firstnameupd = $_POST['firstnameupd'];
+  $lastnameupd = $_POST['lastnameupd'];
+  $emailupd = $_POST['emailupd'];
+  $phoneupd = $_POST['phoneupd'];
+
+  $query = "UPDATE `crudtable` SET `firstname` = '$firstnameupd', `lastname` = '
+  $lastnameupd', `email` = '$emailupd', `mobile` = '$mobileupd' WHERE `crudtable`.`id` = '$hidden_user_idupd'";
+  mysqli_query($conn,$query);
+}
 ?>

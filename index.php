@@ -171,7 +171,7 @@
               });
               
           }
-      }
+      };
 
       function getUserDetails(id){
         var conf = confirm("Are you sure about updating the data!!!");
@@ -190,8 +190,29 @@
           );
           $("#update").modal("show");
 
-        
-      }
+     
+      };
+      function updateUserDetail(){
+        var firstnameupd = $('#update_firstname').val();
+          var lastnameupd = $('#update_lastname').val();
+          var emailupd = $('#update_email').val();
+          var mobileupd = $('#update_mobile').val();
+
+          var hidden_user_idupd = $('#hidden_user_id').val();
+          $.post("backend.php",{
+              hidden_user_idupd:hidden_user_idupd,
+              firstnameupd:firstnameupd,
+              lastnameupd:lastnameupd,
+              emailupd:emailupd,
+              mobileupd:mobileupd,
+          },
+          function(data,status){
+            $("#update").modal("hide");
+            readRecords();
+          }
+
+          );
+      };
 
   </script>
 </body>
