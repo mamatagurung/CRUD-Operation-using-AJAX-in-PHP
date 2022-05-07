@@ -60,6 +60,52 @@
     </div>
   </div>
 </div> 
+
+
+<!-- update modal -->
+   <!-- The Modal -->
+   <div class="modal" id="update">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">AJAX CRUD OPERATION</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+    
+      <!-- Modal body -->
+      <div class="modal-body">
+       <div class="form-group">
+          <label for="update_firstname">Update Firstname:</label>
+          <input type="text" name="" id="update_firstname" class="form-control" placeholder="First Name">
+       </div>
+       <div class="form-group">
+           <label for="update_lastname">Update Lastname:</label>
+           <input type="text" name="" id="update_lastname" class="form-control" placeholder="Last Name">
+           </div>
+           <div class="form-group">
+           <label for="update_email">Update Email ID:</label>
+           <input type="email" name="" id="update_email" class="form-control" placeholder="Email">
+           </div>
+           <div class="form-group">
+           <label for="update_mobile">Update Mobile:</label>
+           <input type="text" name="" id="update_mobile" class="form-control" placeholder="Mobile Number">   
+       </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="updateUserDetail()">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <input type="hidden" name="" id="hidden_user_id">
+      </div>
+
+    </div>
+  </div>
+</div> 
+
+
    </div>
 
 
@@ -67,7 +113,15 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <!-- <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript" src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>    -->
+    <!-- jQuery library -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript">
+      
 
       $(document).ready(function(){
           readRecords();
@@ -118,6 +172,27 @@
               
           }
       }
+
+      function getUserDetails(id){
+        var conf = confirm("Are you sure about updating the data!!!");
+          $('#hidden_user_id').val(id);
+
+          $.post("backend.php",{
+              id:id,
+          }, function(data,status){
+              var user = JSON.parse(data);
+              $('#update_firstname').val(user.firstname);
+              $('#update_lastname').val(user.lastname);
+              $('#update_email').val(user.email);
+              $('#update_mobile').val(user.mobile);
+
+          }
+          );
+          $("#update").modal("show");
+
+        
+      }
+
   </script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 <?php
 
 $servername = "localhost";
-$username = "";
-$password = "";
+$username = "mamata";
+$password = "sv50/tXJxd.XOQU4";
 $dbname = "crudoperation";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$dbname);
@@ -38,7 +38,7 @@ if(isset($_POST['readrecord'])){
         <td>'.$row['firstname'].'</td>
         <td>'.$row['lastname'].'</td>
         <td>'.$row['email'].'</td>
-        <td>'.$row['phone'].'</td>
+        <td>'.$row['mobile'].'</td>
         <td>
         <button onclick="getUserDetails('.$row['id'].')" class="btn btn-warning">Edit</button>
         </td>
